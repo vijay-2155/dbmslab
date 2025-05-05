@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Lab Experiments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Prism CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="js/main.js" defer></script>
+</head>
+<body class="bg-gray-50">
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <div id="sidebar" class="hidden md:block w-full md:w-72 bg-gradient-to-b from-gray-800 to-gray-900 text-white p-6 shadow-xl">
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-4 md:p-8 overflow-y-auto">
+            <div id="exp5" class="max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="bg-white rounded-xl shadow-lg p-4 md:p-6 mb-8">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Experiment 5: PL/SQL Programming</h1>
+                    <div class="flex flex-col md:flex-row items-start md:items-center text-sm text-gray-500">
+                        <span class="mb-2 md:mb-0 md:mr-4">📅 Date: May 5, 2025</span>
+                        <span>⏱️ Duration: 3 hours</span>
+                    </div>
+                </div>
+
+                <!-- Aim Section -->
+                <section class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Aim</h2>
+                    <p class="text-gray-600">
+                        To understand and implement PL/SQL programs with declaration, executable, and exception-handling sections, using a student marks example.
+                    </p>
+                </section>
+
+                <!-- Theory Section -->
+                <section class="mb-8 bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Theory</h2>
+                    <div class="space-y-4">
+                        <p class="text-gray-600">
+                            PL/SQL is Oracle's procedural extension to SQL. A PL/SQL program consists of three main sections:
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h3 class="text-blue-800 font-semibold mb-2">Declaration Section</h3>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Variables</li>
+                                    <li>Constants</li>
+                                    <li>Cursors</li>
+                                    <li>User-defined types</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h3 class="text-green-800 font-semibold mb-2">Executable Section</h3>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>SQL statements</li>
+                                    <li>PL/SQL statements</li>
+                                    <li>Control structures</li>
+                                    <li>Loops and conditions</li>
+                                </ul>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h3 class="text-purple-800 font-semibold mb-2">Exception Section</h3>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Error handling</li>
+                                    <li>Custom exceptions</li>
+                                    <li>Exception raising</li>
+                                    <li>Error messages</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sample Database -->
+                <section class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Sample Database Setup</h2>
+                    <div class="bg-[#1E1E1E] rounded-lg p-4 relative">
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded absolute top-4 right-4 copy-button">
+                            Copy
+                        </button>
+                        <pre><code class="language-sql">
+-- Create Student Table
+CREATE TABLE STUDENTS (
+    ROLL_NO NUMBER PRIMARY KEY,
+    NAME VARCHAR2(50),
+    MARKS NUMBER,
+    GRADE VARCHAR2(2)
+);
+
+-- Insert Sample Data
+INSERT INTO STUDENTS VALUES (1, 'John Doe', 85, 'A');
+INSERT INTO STUDENTS VALUES (2, 'Jane Smith', 92, 'A');
+INSERT INTO STUDENTS VALUES (3, 'Mike Johnson', 65, 'B');
+INSERT INTO STUDENTS VALUES (4, 'Sarah Williams', 78, 'B');
+INSERT INTO STUDENTS VALUES (5, 'David Brown', 91, 'A');</code></pre>
+                    </div>
+                </section>
+
+                <!-- PL/SQL Program -->
+                <section class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">PL/SQL Program</h2>
+                    <div class="bg-[#1E1E1E] rounded-lg p-4 relative">
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded absolute top-4 right-4 copy-button">
+                            Copy
+                        </button>
+                        <pre><code class="language-sql">
+DECLARE
+    -- Declaration Section
+    CURSOR student_cur IS 
+        SELECT roll_no, name, marks 
+        FROM students 
+        WHERE marks >= 80;
+    
+    v_roll_no students.roll_no%TYPE;
+    v_name students.name%TYPE;
+    v_marks students.marks%TYPE;
+    v_count NUMBER := 0;
+    
+    -- Custom exception
+    no_firstclass EXCEPTION;
+
+BEGIN
+    -- Executable Section
+    OPEN student_cur;
+    
+    DBMS_OUTPUT.PUT_LINE('Students with First Class:');
+    DBMS_OUTPUT.PUT_LINE('-------------------------');
+    
+    LOOP
+        FETCH student_cur INTO v_roll_no, v_name, v_marks;
+        EXIT WHEN student_cur%NOTFOUND;
+        
+        DBMS_OUTPUT.PUT_LINE(
+            'Roll No: ' || v_roll_no || 
+            ', Name: ' || v_name || 
+            ', Marks: ' || v_marks
+        );
+        
+        v_count := v_count + 1;
+    END LOOP;
+    
+    CLOSE student_cur;
+    
+    -- Check if any records were found
+    IF v_count = 0 THEN
+        RAISE no_firstclass;
+    END IF;
+    
+    DBMS_OUTPUT.PUT_LINE('Total students with First Class: ' || v_count);
+
+EXCEPTION
+    -- Exception Handling Section
+    WHEN no_firstclass THEN
+        DBMS_OUTPUT.PUT_LINE('No students found with First Class');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
+END;
+/</code></pre>
+                    </div>
+                </section>
+
+                <!-- Output Section -->
+                <section class="mb-8">
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Sample Output</h2>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
+                            <h3 class="text-green-800 font-semibold mb-2">Program Output</h3>
+                            <pre class="text-green-800">
+Students with First Class:
+-------------------------
+Roll No: 1, Name: John Doe, Marks: 85
+Roll No: 2, Name: Jane Smith, Marks: 92
+Roll No: 5, Name: David Brown, Marks: 91
+Total students with First Class: 3</pre>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

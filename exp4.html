@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Lab Experiments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Prism CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="js/main.js" defer></script>
+</head>
+<body class="bg-gray-50">
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <div id="sidebar" class="hidden md:block w-full md:w-72 bg-gradient-to-b from-gray-800 to-gray-900 text-white p-6 shadow-xl">
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-4 md:p-8 overflow-y-auto">
+            <div id="exp4" class="max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="bg-white rounded-xl shadow-lg p-4 md:p-6 mb-8">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Experiment 4: String, Date & Conversion Functions</h1>
+                    <div class="flex flex-col md:flex-row items-start md:items-center text-sm text-gray-500">
+                        <span class="mb-2 md:mb-0 md:mr-4">📅 Date: May 5, 2025</span>
+                        <span>⏱️ Duration: 3 hours</span>
+                    </div>
+                </div>
+
+                <!-- Aim Section -->
+                <section class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Aim</h2>
+                    <p class="text-gray-600">
+                        To understand and implement Oracle SQL's built-in functions for string manipulation, date operations, and data type conversions.
+                    </p>
+                </section>
+
+                <!-- Theory Section -->
+                <section class="mb-8 bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Theory</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- String Functions -->
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h3 class="text-blue-800 font-semibold mb-2">String Functions</h3>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>CONCAT, LOWER, UPPER</li>
+                                <li>INITCAP, LENGTH, SUBSTR</li>
+                                <li>LPAD, RPAD, TRIM</li>
+                                <li>LTRIM, RTRIM, INSTR</li>
+                            </ul>
+                        </div>
+
+                        <!-- Date Functions -->
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h3 class="text-green-800 font-semibold mb-2">Date Functions</h3>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>SYSDATE, NEXT_DAY</li>
+                                <li>ADD_MONTHS, LAST_DAY</li>
+                                <li>MONTHS_BETWEEN</li>
+                                <li>TRUNC, ROUND</li>
+                            </ul>
+                        </div>
+
+                        <!-- Conversion Functions -->
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <h3 class="text-purple-800 font-semibold mb-2">Conversion Functions</h3>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li>TO_CHAR (numbers, dates)</li>
+                                <li>TO_NUMBER</li>
+                                <li>TO_DATE</li>
+                                <li>Format models</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Example Queries -->
+                <section class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Example Queries</h2>
+
+                    <!-- String Functions -->
+                    <div class="mb-6">
+                        <h3 class="text-xl text-blue-600 font-semibold mb-3">String Function Examples</h3>
+                        <div class="bg-[#1E1E1E] rounded-lg p-4 relative">
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded absolute top-4 right-4 copy-button">
+                                Copy
+                            </button>
+                            <pre><code class="language-sql">
+-- String manipulation examples
+SELECT 
+    UPPER('hello world') as uppercase_text,
+    LOWER('HELLO WORLD') as lowercase_text,
+    INITCAP('hello world') as proper_case,
+    LENGTH('hello world') as text_length,
+    SUBSTR('hello world', 1, 5) as substring_text,
+    LPAD('hello', 10, '*') as left_padded,
+    RPAD('hello', 10, '*') as right_padded,
+    LTRIM('   hello   ') as left_trimmed,
+    RTRIM('   hello   ') as right_trimmed,
+    INSTR('hello world', 'o') as position_of_o,
+    'Hello' || ' ' || 'World' as concatenated
+FROM dual;</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Date Functions -->
+                    <div class="mb-6">
+                        <h3 class="text-xl text-green-600 font-semibold mb-3">Date Function Examples</h3>
+                        <div class="bg-[#1E1E1E] rounded-lg p-4 relative">
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded absolute top-4 right-4 copy-button">
+                                Copy
+                            </button>
+                            <pre><code class="language-sql">
+-- Date manipulation examples
+SELECT 
+    SYSDATE as current_date,
+    NEXT_DAY(SYSDATE, 'FRIDAY') as next_friday,
+    ADD_MONTHS(SYSDATE, 3) as three_months_later,
+    LAST_DAY(SYSDATE) as month_last_day,
+    MONTHS_BETWEEN(
+        TO_DATE('2025-12-31', 'YYYY-MM-DD'),
+        TO_DATE('2025-01-01', 'YYYY-MM-DD')
+    ) as months_diff,
+    TRUNC(SYSDATE) as truncated_date,
+    ROUND(SYSDATE) as rounded_date,
+    LEAST(
+        TO_DATE('2025-01-01', 'YYYY-MM-DD'),
+        TO_DATE('2024-12-31', 'YYYY-MM-DD')
+    ) as earlier_date,
+    GREATEST(
+        TO_DATE('2025-01-01', 'YYYY-MM-DD'),
+        TO_DATE('2024-12-31', 'YYYY-MM-DD')
+    ) as later_date
+FROM dual;</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Conversion Functions -->
+                    <div class="mb-6">
+                        <h3 class="text-xl text-purple-600 font-semibold mb-3">Conversion Function Examples</h3>
+                        <div class="bg-[#1E1E1E] rounded-lg p-4 relative">
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded absolute top-4 right-4 copy-button">
+                                Copy
+                            </button>
+                            <pre><code class="language-sql">
+-- Data type conversion examples
+SELECT 
+    -- Number to Character conversions
+    TO_CHAR(1234.56, '99,999.99') as formatted_number,
+    TO_CHAR(1234.56, '$9,999.99') as currency_format,
+    
+    -- Date to Character conversions
+    TO_CHAR(SYSDATE, 'DD-MON-YYYY') as formatted_date,
+    TO_CHAR(SYSDATE, 'Day, DD Month YYYY') as long_date,
+    TO_CHAR(SYSDATE, 'HH24:MI:SS') as time_format,
+    
+    -- Character to Number conversion
+    TO_NUMBER('1,234.56', '9,999.99') as parsed_number,
+    
+    -- Character to Date conversion
+    TO_DATE('2025-01-01', 'YYYY-MM-DD') as parsed_date,
+    TO_DATE('01-JAN-2025 14:30:00', 'DD-MON-YYYY HH24:MI:SS') as parsed_datetime
+FROM dual;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Syntax Section -->
+                <section class="mb-8 bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Syntax Reference</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- String Functions Syntax -->
+                        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                            <h3 class="text-blue-600 font-semibold mb-3">String Function Syntax</h3>
+                            <div class="bg-[#1E1E1E] rounded-md p-3">
+                                <pre><code class="language-sql">
+-- Basic String Functions
+UPPER(string)
+LOWER(string)
+INITCAP(string)
+LENGTH(string)
+SUBSTR(string, start_position [, length])
+INSTR(string, substring [, start_position [, occurrence]])
+
+-- Padding and Trimming
+LPAD(string, padded_length [, pad_string])
+RPAD(string, padded_length [, pad_string])
+LTRIM(string [, trim_string])
+RTRIM(string [, trim_string])
+TRIM([trim_char FROM] string)</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Date Functions Syntax -->
+                        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                            <h3 class="text-green-600 font-semibold mb-3">Date Function Syntax</h3>
+                            <div class="bg-[#1E1E1E] rounded-md p-3">
+                                <pre><code class="language-sql">
+-- Basic Date Functions
+SYSDATE
+NEXT_DAY(date, day_of_week)
+ADD_MONTHS(date, number_of_months)
+LAST_DAY(date)
+MONTHS_BETWEEN(date1, date2)
+
+-- Date Rounding
+TRUNC(date [, format_model])
+ROUND(date [, format_model])
+
+-- Date Comparison
+LEAST(date1, date2, ...)
+GREATEST(date1, date2, ...)</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Conversion Functions Syntax -->
+                        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                            <h3 class="text-purple-600 font-semibold mb-3">Conversion Function Syntax</h3>
+                            <div class="bg-[#1E1E1E] rounded-md p-3">
+                                <pre><code class="language-sql">
+-- Number and Date to String
+TO_CHAR(number [, format_model])
+TO_CHAR(date [, format_model])
+
+-- String to Number
+TO_NUMBER(string [, format_model])
+
+-- String to Date
+TO_DATE(string [, format_model])</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Common Format Models -->
+                        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                            <h3 class="text-orange-600 font-semibold mb-3">Common Format Models</h3>
+                            <div class="bg-[#1E1E1E] rounded-md p-3">
+                                <pre><code class="language-sql">
+-- Number Format Models
+'9999.99'       -- Basic number with decimals
+'$9,999.99'     -- Currency format
+'09999'         -- Zero-padded number
+
+-- Date Format Models
+'YYYY-MM-DD'    -- Year-Month-Day
+'DD-MON-YYYY'   -- Day-Month-Year
+'HH24:MI:SS'    -- 24-hour time
+'Day, DD Month YYYY' -- Full date format</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Output Section -->
+                <section class="mb-8">
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-700 mb-4">Sample Output</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
+                            <h3 class="text-green-800 font-semibold mb-2">String Functions Result</h3>
+                            <pre class="text-green-800">
+UPPERCASE_TEXT: HELLO WORLD
+LOWERCASE_TEXT: hello world
+PROPER_CASE: Hello World
+TEXT_LENGTH: 11
+SUBSTRING_TEXT: hello
+LEFT_PADDED: *****hello
+RIGHT_PADDED: hello*****</pre>
+                        </div>
+                        <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
+                            <h3 class="text-green-800 font-semibold mb-2">Date Functions Result</h3>
+                            <pre class="text-green-800">
+CURRENT_DATE: 05-MAY-2025
+NEXT_FRIDAY: 09-MAY-2025
+THREE_MONTHS_LATER: 05-AUG-2025
+MONTH_LAST_DAY: 31-MAY-2025
+MONTHS_DIFF: 12</pre>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
