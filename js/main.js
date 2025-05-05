@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 'exp1',
             title: 'Tables & Constraints',
             icon: '📝',
-            link: 'exp1.html'
+            link: 'index.html'
         },
         {
             id: 'exp2',
