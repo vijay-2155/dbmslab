@@ -165,8 +165,73 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+    
+    // Initialize copy buttons functionality
+    function initializeCopyButtons() {
+        document.querySelectorAll('.copy-button').forEach(button => {
+            button.addEventListener('click', function() {
+                window.copyCode(this);
+            });
+        });
+    }
+
+    // Global copy function for inline onclick handlers
+    window.copyCode = function(button) {
+        const codeBlock = button.closest('div').querySelector('code');
+        const text = codeBlock.innerText;
+        
+        // Create temporary textarea
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        
+        try {
+            // Execute copy command
+            document.execCommand('copy');
+            
+            // Visual feedback
+            const originalText = button.innerText;
+            button.innerText = 'Copied!';
+            button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+            button.classList.add('bg-green-500', 'hover:bg-green-600');
+            
+            // Reset button after 2 seconds
+            setTimeout(() => {
+                button.innerText = originalText;
+                button.classList.remove('bg-green-500', 'hover:bg-green-600');
+                button.classList.add('bg-blue-500', 'hover:bg-blue-600');
+            }, 2000);
+        } catch (err) {
+            console.error('Failed to copy text:', err);
+            
+            // Error feedback
+            button.innerText = 'Failed to copy';
+            button.classList.add('bg-red-500', 'hover:bg-red-600');
+            
+            setTimeout(() => {
+                button.innerText = 'Copy';
+                button.classList.remove('bg-red-500', 'hover:bg-red-600');
+                button.classList.add('bg-blue-500', 'hover:bg-blue-600');
+            }, 2000);
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+
+    // Initialize sidebar and copy buttons when DOM is loaded
+    function initializePage() {
+        // Create sidebar content
+        generateSidebar();
+
+        // Initialize copy buttons
+        initializeCopyButtons();
+    }
 
     // Initialize sidebar and mobile menu
     generateSidebar();
     setupMobileMenu();
+
+    // Call initialization function
+    initializePage();
 });
