@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 'exp1',
             title: 'Tables & Constraints',
             icon: '📝',
-            link: 'index.html'
+            link: 'exp1.html'
         },
         {
             id: 'exp2',
@@ -31,73 +31,72 @@ document.addEventListener('DOMContentLoaded', function() {
             icon: '🔧',
             link: 'exp5.html'
         },
-        {  id: 'exp5',
+        {
+            id: 'exp6',
             title: 'PL/SQL Programming part 2',
             icon: '🔧',
             link: 'exp6.html'
-
         },
-        {  id: 'exp6',
+        {
+            id: 'exp7',
             title: 'Nested if, CASE and CASE Expression',
             icon: '🔧',
             link: 'exp7.html'
-
         },
-        {  id: 'exp7',
+        {
+            id: 'exp8',
             title: 'Loops and Exception Handling',
             icon: '🔧',
             link: 'exp8.html'
-
         },
-        {  id: 'exp8',
+        {
+            id: 'exp9',
             title: 'Procedures in PL/SQL',
             icon: '🔧',
             link: 'exp9.html'
-
         },
-        {  id: 'exp9',
+        {
+            id: 'exp10',
             title: 'Stored Functions in PL/SQL',
             icon: '🔧',
             link: 'exp10.html'
-
         },
-        {  id: 'exp10',
+        {
+            id: 'exp11',
             title: 'Cursors in PL/SQL',
             icon: '🔧',
             link: 'exp11.html'
-
-        },
-        {  id: 'exp11',
-            title: 'Triggers in PL/SQL',
-            icon: '🔧',
-            link: 'exp12.html'
-
         },
         {
             id: 'exp12',
+            title: 'Triggers in PL/SQL',
+            icon: '🔧',
+            link: 'exp12.html'
+        },
+        {
+            id: 'exp13',
             title: 'Database Indexing',
             icon: '🔍',
             link: 'exp13.html'
         },
         {
-            id: 'exp13',
+            id: 'exp14',
             title: 'JDBC Database Connectivity',
             icon: '🔗',
             link: 'exp14.html'
         },
         {
-            id: 'exp14',
+            id: 'exp15',
             title: 'JDBC Insert values',
             icon: '🔗',
             link: 'exp15.html'
         },
         {
-            id: 'exp15',
+            id: 'exp16',
             title: 'JDBC Delete values',
             icon: '🔗',
             link: 'exp16.html'
         }
-
     ];
 
     // Generate sidebar content
